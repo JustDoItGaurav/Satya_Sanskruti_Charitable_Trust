@@ -103,7 +103,7 @@
     <!-- Navbar -->
     <nav class="navbar1 fixed-top">
         <div class="container-fluid d-flex justify-content-between align-items-center">
-            <a class="navbar-brand1" href="Index.html">
+            <a class="navbar-brand1" href="index.html">
                 <img src="Images/logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
                 सत्य संस्कृति चैरिटेबल ट्रस्ट
             </a>
