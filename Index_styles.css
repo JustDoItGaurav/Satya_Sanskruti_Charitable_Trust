@@ -1,0 +1,341 @@
+/* Root variables for consistent styling */
+:root {
+  --primary-gradient: linear-gradient(135deg, #fbc02d, #ffa500, #ff7800);
+  --card-gradient: linear-gradient(180deg, #fff8dc, #ffd700);
+  --body-gradient: linear-gradient(180deg, #d4fc79, #96e6a1);
+  --primary-color: #ffa500;
+  --accent-color: #ff7800;
+  --text-color: #fff;
+  --border-radius-sm: 10px;
+  --border-radius-md: 15px;
+  --border-radius-lg: 20px;
+  --shadow-standard: 0 4px 10px rgba(0, 0, 0, 0.2);
+  --transition-standard: all 0.4s ease-in-out;
+  --font-family-base: Arial, sans-serif;
+  --font-family-accent: "Roboto Slab", serif;
+}
+
+/* General Styles */
+body {
+  background: var(--body-gradient);
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+html {
+  font-size: calc(14px + 0.25vw);
+}
+
+
+/* Navbar Styling */
+.navbar1 {
+  position: fixed; /* Fix the navbar to the top */
+  top: 0; /* Position at the top of the viewport */
+  z-index: 1000; /* Ensure it stays above other content */
+  width: 100%; /* Span the full width */
+  padding: clamp(8px, 2vw, 15px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--primary-gradient);
+  box-shadow: var(--shadow-standard);
+  border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+}
+/* Add margin-top to the first element after the navbar */
+.navbar1 + * {
+  margin-top: 80px; /* Adjust this value based on the height of your navbar */
+}
+.navbar-brand1 {
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.navbar-brand1 img {
+  width: clamp(35px, 5vw, 50px);
+  height: clamp(35px, 5vw, 50px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--text-color);
+}
+
+.container {
+  padding: clamp(5px, 1vw, 10px);
+}
+
+.nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: clamp(5px, 1.5vw, 10px);
+  background: var(--primary-gradient);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2vw, 20px);
+  font-weight: bold;
+  color: var(--text-color);
+  transition: var(--transition-standard);
+  border-radius: var(--border-radius-sm);
+  text-align: center;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+}
+
+.nav-link.active,
+.nav-link:hover {
+  background: var(--accent-color);
+  color: var(--text-color);
+}
+
+/* Carousel Styling */
+.carousel-inner img {
+  height: clamp(200px, 50vw, 500px);
+  object-fit: cover;
+  width: 100%;
+  border-radius: var(--border-radius-lg);
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 15px;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Card Styling */
+.container .row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: clamp(15px, 3vw, 30px);
+  flex-wrap: wrap;
+}
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--card-gradient);
+  box-shadow: var(--shadow-standard);
+  border-radius: var(--border-radius-lg);
+  transition: var(--transition-standard);
+  width: 100%;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: clamp(100px, 20vw, 150px);
+  height: clamp(100px, 20vw, 150px);
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+}
+
+/* Team Section */
+.team-members {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+
+.team-member {
+  text-align: center;
+  transition: var(--transition-standard);
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.team-member img {
+  width: clamp(120px, 20vw, 150px);
+  height: clamp(120px, 20vw, 150px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+  transition: var(--transition-standard);
+}
+
+.team-member img:hover {
+  transform: scale(1.1);
+  border-color: var(--accent-color);
+}
+
+/* Middle Section */
+.MIDDLE {
+  height: auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  column-gap: 0.3125rem;
+  margin-top: 0.625rem;
+  padding: 0 0.625rem;
+  margin-bottom: 10px;
+}
+
+.MIDDLE > img {
+  width: 100%;
+}
+
+.MIDDLE_LEFT,
+.MIDDLE_RIGHT {
+  min-height: auto;
+  background: var(--card-gradient);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: clamp(0.8rem, 2vw, 1rem);
+  border: 0.125rem solid black;
+  box-shadow: inset -0.125rem -0.125rem 0.625rem black;
+  border-radius: var(--border-radius-md);
+}
+
+.PARA {
+  font-size: clamp(0.8rem, 2vw, 0.9375rem);
+  font-family: var(--font-family-accent);
+}
+
+.MIDDLE_LEFT > img,
+.MIDDLE_RIGHT > img {
+  height: clamp(7rem, 25vw, 12.5rem);
+  width: 90%;
+  border: 0.125rem solid black;
+  transition: var(--transition-standard);
+}
+
+.MIDDLE_LEFT > img:hover,
+.MIDDLE_RIGHT > img:hover {
+  height: clamp(8rem, 30vw, 13.75rem);
+  width: 100%;
+  border-radius: var(--border-radius-md);
+}
+
+/* Footer Styling */
+footer {
+  background: var(--primary-gradient);
+  padding: clamp(10px, 2vw, 20px) 0;
+  text-align: center;
+  color: var(--text-color);
+  border-top-left-radius: var(--border-radius-lg);
+  border-top-right-radius: var(--border-radius-lg);
+  font-size: clamp(0.7rem, 1.5vw, 1rem);
+}
+
+/* Media Queries */
+@media only screen and (max-width: 768px) {
+  .container .row {
+    flex-direction: column;
+  }
+  
+  .card {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 1rem; /* This adds vertical spacing between cards */
+  }
+  
+  .MIDDLE {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .nav {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .nav {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .team-members {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card {
+    margin-bottom: 1.5rem; /* Increased spacing for mobile */
+  }
+}
+
+/* Add these styles to your Index_styles.css file */
+
+/* Toggle Button for Mobile Navigation */
+.nav-toggle {
+  display: none;
+  background: var(--primary-gradient, linear-gradient(135deg, #fbc02d, #ffa500, #ff7800));
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.nav-toggle:hover {
+  background: var(--accent-color, #ff7800);
+}
+
+.nav-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Media Queries */
+@media (max-width: 767.98px) {
+  .nav-toggle {
+    display: flex;
+  }
+  
+  /* Make the navigation menu full width on small screens */
+  .nav.nav-pills {
+    flex-direction: column !important;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .nav.nav-pills .nav-link {
+    text-align: center;
+    margin: 2px 0;
+    border-radius: 10px;
+  }
+  
+  /* Make sure the navigation container is stacked properly */
+  .container.d-flex.justify-content-center {
+    display: block !important;
+  }
+  
+  /* Add some spacing after the nav container */
+  .nav-container {
+    margin-bottom: 15px;
+  }
+}
+
+/* Fix responsive cards in smaller screens */
+@media (max-width: 767.98px) {
+  .container.text-center.my-5 .row {
+    flex-direction: column;
+  }
+  
+  .container.text-center.my-5 .col {
+    margin-bottom: 20px;
+  }
+}

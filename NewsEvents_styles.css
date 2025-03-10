@@ -1,0 +1,72 @@
+.MIDDLE {
+  height: auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  column-gap: 0.3125rem;
+  margin-top: 0.625rem;
+  padding: 0 0.625rem;
+  margin-bottom: 10px;
+}
+
+.MIDDLE > img {
+  width: 100%;
+}
+
+.MIDDLE_LEFT, 
+.MIDDLE_RIGHT {
+  min-height: auto;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: clamp(0.75rem, 2vw, 1rem);
+  border: 0.125rem solid black;
+  box-shadow: inset -0.125rem -0.125rem 0.625rem black;
+}
+
+.PARA {
+  font-size: clamp(0.875rem, 2vw, 0.9375rem);
+  font-family: "Roboto Slab", serif;
+}
+
+.MIDDLE_LEFT > img, 
+.MIDDLE_RIGHT > img {
+  height: clamp(8rem, 30vw, 12.5rem);
+  width: 90%;
+  border: 0.125rem solid black;
+  transition: all ease 0.5s;
+}
+
+.MIDDLE_LEFT > img:hover, 
+.MIDDLE_RIGHT > img:hover {
+  height: clamp(9rem, 35vw, 13.75rem);
+  width: 100%;
+  border-radius: 1.25rem;
+}
+
+/* General adjustments for tablets and medium devices */
+@media screen and (max-width: 48rem) {
+  .MIDDLE {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    height: auto;
+  }
+  
+  .MIDDLE_LEFT,
+  .MIDDLE_RIGHT {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+}
+
+/* Adjustments for smaller devices and mobile phones */
+@media screen and (max-width: 30rem) {
+  .MIDDLE_LEFT,
+  .MIDDLE_RIGHT {
+    padding: 0.75rem;
+  }
+  
+  .PARA {
+    font-size: clamp(0.8125rem, 1.8vw, 0.875rem);
+  }
+}

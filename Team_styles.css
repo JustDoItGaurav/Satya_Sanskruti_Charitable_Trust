@@ -1,0 +1,156 @@
+/* Apply global styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Apply fluid typography for responsive font scaling */
+html {
+  font-size: calc(14px + 0.25vw);
+}
+
+/* Title styling - combined duplicated selectors */
+.title {
+  width: 100%;
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+  padding: clamp(10px, 3vw, 20px); /* Responsive padding */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.title h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 3.5rem); /* Responsive font size */
+  
+}
+
+/* Team section */
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* Team section title (for "Meet Our Team") */
+.team-title {
+  width: 100%;
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 1.5rem;
+}
+
+/* Team members container */
+.team-members {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+/* Team member card styles */
+.team-member {
+  text-align: center;
+  margin: 0.5rem;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  background-color: #f9f9f9;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-standard);
+  transition: var(--transition-standard);
+  flex: 1 1 300px;
+  max-width: 350px;
+}
+
+.team-member:hover {
+  transform: translateY(-0.3125rem);
+}
+
+/* Team member image */
+.team-member img {
+  width: clamp(6.25rem, 30vw, 9.375rem);
+  height: clamp(6.25rem, 30vw, 9.375rem);
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto var(--spacing-standard);
+  border: 0.25rem solid #fff;
+  box-shadow: var(--shadow-standard);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.team-member img:hover {
+  transform: scale(1.1);
+}
+
+/* Team member text styles */
+.team-member h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  margin-bottom: 0.625rem;
+  color: var(--primary-color);
+}
+
+.team-member p {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  color: #666;
+  line-height: 1.5;
+  margin: 0 auto 0.9375rem;
+  max-width: 300px;
+}
+
+/* Map container */
+#map {
+  height: 400px;
+  background-color: #e0e0e0;
+  width: 100%;
+}
+
+/* Media Queries - consolidated and organized by breakpoint */
+/* Mobile - Small devices */
+@media screen and (max-width: 480px) {
+  .team-member {
+    flex: 0 1 100%;
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  #map {
+    height: 250px;
+  }
+}
+
+/* Tablet - Medium devices */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .team-member {
+    flex: 0 1 45%;
+    max-width: 45%;
+  }
+
+  #map {
+    height: 300px;
+  }
+}
+
+/* Desktop - Large devices */
+@media screen and (min-width: 769px) {
+  .team-members {
+    justify-content: space-around;
+  }
+
+  .team-member {
+    flex: 0 1 30%;
+    max-width: 30%;
+  }
+
+  #map {
+    height: 400px;
+  }
+}
