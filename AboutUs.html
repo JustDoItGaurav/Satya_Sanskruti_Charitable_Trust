@@ -55,12 +55,16 @@
             </button>
             
             <!-- Navigation Links -->
-            <nav class="nav nav-pills flex-column flex-sm-row" id="mainNav">
-              <a class="flex-sm-fill text-sm-center nav-link" href="index.html">Home</a>
-              <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="AboutUs.html">About Us</a>
-              <a class="flex-sm-fill text-sm-center nav-link" href="NewsEvents.html">Events</a>
-              <a class="flex-sm-fill text-sm-center nav-link" href="Team.html">Team</a>
-            </nav>
+            <!-- Navigation Links -->
+<nav class="nav nav-pills flex-column flex-sm-row" id="mainNav">
+  <a class="flex-sm-fill text-sm-center nav-link " aria-current="page" href="index.html">Home</a>
+  <a class="flex-sm-fill text-sm-center nav-link active" href="AboutUs.html">About Us</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="NewsEvents.html">Events</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="Team.html">Team</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="Gallery.html">Photo Gallery</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="ContactUs.html">Contact Us</a>
+</nav>
+
           </div>
         </div>
 
@@ -177,141 +181,123 @@
 
     <!-- Custom JavaScript for the page -->
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // Navigation toggle functionality
+      document.addEventListener('DOMContentLoaded', function () {
+        // Navbar Toggle for Mobile
         const navToggle = document.querySelector('.nav-toggle');
         const mainNav = document.getElementById('mainNav');
-        
-        navToggle.addEventListener('click', function() {
-          // Toggle the 'd-none' class for smaller screens
+    
+        navToggle.addEventListener('click', function () {
           mainNav.classList.toggle('d-none');
-          
-          // Toggle aria-expanded attribute
-          const expanded = mainNav.classList.contains('d-none') ? 'false' : 'true';
-          navToggle.setAttribute('aria-expanded', expanded);
-          
-          // Change icon and text when toggled
+    
+          // Toggle icon
+          const icon = navToggle.querySelector('i');
           if (mainNav.classList.contains('d-none')) {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
             navToggle.innerHTML = '<i class="fas fa-bars me-2"></i> Menu';
           } else {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
             navToggle.innerHTML = '<i class="fas fa-times me-2"></i> Close';
           }
         });
-        
-        // Initially hide the menu on mobile devices
-        if (window.innerWidth < 768) {
-          mainNav.classList.add('d-none');
-        }
-        
-        // Handle window resize
-        window.addEventListener('resize', function() {
-          if (window.innerWidth >= 768) {
-            mainNav.classList.remove('d-none');
-          } else if (!mainNav.classList.contains('d-none') && navToggle.getAttribute('aria-expanded') !== 'true') {
-            mainNav.classList.add('d-none');
-          }
+    
+        // Hide menu on mobile when a link is clicked
+        document.querySelectorAll('#mainNav .nav-link').forEach(link => {
+          link.addEventListener('click', function () {
+            if (window.innerWidth < 768) {
+              mainNav.classList.add('d-none');
+              navToggle.innerHTML = '<i class="fas fa-bars me-2"></i> Menu';
+            }
+          });
         });
-
-        // Map initialization function
+    
+        // Initialize Map Function
         function initMap(userPosition = null) {
-          // Coordinates for Pillai College of Panvel (default location)
           const defaultLatitude = 18.9894;
           const defaultLongitude = 73.1185;
-          
-          // Use user position if available, otherwise use default
+    
+          // Use user position if available, otherwise default to Trust location
           const latitude = userPosition ? userPosition.coords.latitude : defaultLatitude;
           const longitude = userPosition ? userPosition.coords.longitude : defaultLongitude;
-          
-          // Calculate center position - if user provided, center between user and trust location
+    
+          // Calculate center position
           const centerLat = userPosition ? (latitude + defaultLatitude) / 2 : defaultLatitude;
           const centerLng = userPosition ? (longitude + defaultLongitude) / 2 : defaultLongitude;
-          
-          // Calculate appropriate zoom level
           const zoom = userPosition ? 10 : 13;
-          
+    
           // Initialize Leaflet map
           const map = L.map('map').setView([centerLat, centerLng], zoom);
           
-          // Add a tile layer to the map
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             maxZoom: 19
           }).addTo(map);
-          
-          // Add a marker for Pillai College/Trust location
-          const trustMarker = L.marker([defaultLatitude, defaultLongitude]).addTo(map)
+    
+          // Marker for Trust location
+          L.marker([defaultLatitude, defaultLongitude]).addTo(map)
             .bindPopup('<strong>Satya Sanskruti Charitable Trust</strong><br>Pillai College of Engineering, Panvel')
             .openPopup();
-          
-          // If user shared location, add their marker too
+    
+          // If user location is available
           if (userPosition) {
-            const userMarker = L.marker([latitude, longitude]).addTo(map)
+            L.marker([latitude, longitude]).addTo(map)
               .bindPopup('Your Location');
-            
-            // Add a line connecting the two points
-            const polyline = L.polyline([
+    
+            // Draw line between locations
+            L.polyline([
               [latitude, longitude],
               [defaultLatitude, defaultLongitude]
             ], {color: 'blue'}).addTo(map);
-            
-            // Calculate distance
-            const distance = calculateDistance(
-              latitude, longitude,
-              defaultLatitude, defaultLongitude
-            );
-            
-            // Display distance information
+    
+            // Calculate and show distance
+            const distance = calculateDistance(latitude, longitude, defaultLatitude, defaultLongitude);
             document.getElementById('userLocation').innerHTML = 
               `<div class="alert alert-info">You are approximately <strong>${distance.toFixed(1)} km</strong> away from our location.</div>`;
           }
         }
-        
-        // Function to calculate distance between two coordinates in kilometers
+    
+        // Calculate distance between two lat/lon points (Haversine formula)
         function calculateDistance(lat1, lon1, lat2, lon2) {
-          const R = 6371; // Radius of Earth in kilometers
+          const R = 6371; // Radius of Earth in km
           const dLat = (lat2 - lat1) * Math.PI / 180;
           const dLon = (lon2 - lon1) * Math.PI / 180;
-          const a = 
-            Math.sin(dLat/2) * Math.sin(dLat/2) +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-            Math.sin(dLon/2) * Math.sin(dLon/2);
+          const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+                    Math.sin(dLon/2) * Math.sin(dLon/2);
           const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
           return R * c;
         }
-        
-        // Check if geolocation is supported by the browser
+    
+        // Check if geolocation is supported
         if (navigator.geolocation) {
-          // Add a loading message
           document.getElementById('userLocation').innerHTML = 
             '<div class="alert alert-secondary">Determining your location...</div>';
             
-          // Get user's current position with a timeout
           navigator.geolocation.getCurrentPosition(
-            // Success callback
             function(position) {
               initMap(position);
             },
-            // Error callback
             function(error) {
-              console.error('Error occurred while fetching user location:', error);
+              console.error('Error fetching user location:', error);
               document.getElementById('userLocation').innerHTML = 
-                '<div class="alert alert-warning">We couldn\'t determine your location. Showing our office only.</div>';
+                '<div class="alert alert-warning">Could not determine your location. Showing default location.</div>';
               initMap();
             },
-            // Options
             {
               timeout: 10000,
               enableHighAccuracy: true
             }
           );
         } else {
-          console.error('Geolocation is not supported by this browser.');
+          console.error('Geolocation not supported.');
           document.getElementById('userLocation').innerHTML = 
-            '<div class="alert alert-warning">Your browser doesn\'t support geolocation. Showing our office location only.</div>';
+            '<div class="alert alert-warning">Geolocation not supported. Showing default location.</div>';
           initMap();
         }
       });
     </script>
+    
 
     <!-- Bootstrap JS Bundle -->
     <script

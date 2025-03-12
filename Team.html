@@ -47,12 +47,16 @@
       </button>
       
       <!-- Navigation Links -->
-      <nav class="nav nav-pills flex-column flex-sm-row" id="mainNav">
-        <a class="flex-sm-fill text-sm-center nav-link " aria-current="page" href="index.html">Home</a>
-        <a class="flex-sm-fill text-sm-center nav-link" href="AboutUs.html">About Us</a>
-        <a class="flex-sm-fill text-sm-center nav-link" href="NewsEvents.html">Events</a>
-        <a class="flex-sm-fill text-sm-center nav-link active" href="Team.html">Team</a>
-      </nav>
+     <!-- Navigation Links -->
+<nav class="nav nav-pills flex-column flex-sm-row" id="mainNav">
+  <a class="flex-sm-fill text-sm-center nav-link " aria-current="page" href="index.html">Home</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="AboutUs.html">About Us</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="NewsEvents.html">Events</a>
+  <a class="flex-sm-fill text-sm-center nav-link active" href="Team.html">Team</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="Gallery.html">Photo Gallery</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="ContactUs.html">Contact Us</a>
+</nav>
+
     </div>
   </div>
     <main class="main">
@@ -179,41 +183,52 @@
  
  <!-- Custom JS for Toggle Menu -->
  <script>
-   document.addEventListener('DOMContentLoaded', function() {
-     const navToggle = document.querySelector('.nav-toggle');
-     const mainNav = document.getElementById('mainNav');
-     
-     navToggle.addEventListener('click', function() {
-       // Toggle the 'd-none' class for smaller screens
-       mainNav.classList.toggle('d-none');
-       
-       // Change icon when toggled
-       const icon = navToggle.querySelector('i');
-       if (mainNav.classList.contains('d-none')) {
-         icon.classList.remove('fa-times');
-         icon.classList.add('fa-bars');
-         navToggle.innerHTML = '<i class="fas fa-bars me-2"></i> Menu';
-       } else {
-         icon.classList.remove('fa-bars');
-         icon.classList.add('fa-times');
-         navToggle.innerHTML = '<i class="fas fa-times me-2"></i> Close';
-       }
-     });
-     
-     // Initially hide the menu on mobile devices
-     if (window.innerWidth < 768) {
-       mainNav.classList.add('d-none');
-     }
-     
-     // Handle window resize
-     window.addEventListener('resize', function() {
-       if (window.innerWidth >= 768) {
-         mainNav.classList.remove('d-none');
-       } else if (!mainNav.classList.contains('d-none') && !navToggle.classList.contains('active')) {
-         mainNav.classList.add('d-none');
-       }
-     });
-   });
- </script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const navToggle = document.querySelector('.nav-toggle');
+    const mainNav = document.getElementById('mainNav');
+
+    navToggle.addEventListener('click', function () {
+      // Toggle the 'd-none' class for smaller screens
+      mainNav.classList.toggle('d-none');
+
+      // Change icon when toggled
+      const icon = navToggle.querySelector('i');
+      if (mainNav.classList.contains('d-none')) {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+        navToggle.innerHTML = '<i class="fas fa-bars me-2"></i> Menu';
+      } else {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+        navToggle.innerHTML = '<i class="fas fa-times me-2"></i> Close';
+      }
+    });
+
+    // Initially hide the menu on mobile devices
+    if (window.innerWidth < 768) {
+      mainNav.classList.add('d-none');
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', function () {
+      if (window.innerWidth >= 768) {
+        mainNav.classList.remove('d-none');
+      } else if (!mainNav.classList.contains('d-none') && !navToggle.classList.contains('active')) {
+        mainNav.classList.add('d-none');
+      }
+    });
+
+    // Close menu when clicking a link (for mobile)
+    document.querySelectorAll('#mainNav .nav-link').forEach(link => {
+      link.addEventListener('click', function () {
+        if (window.innerWidth < 768) {
+          mainNav.classList.add('d-none');
+          navToggle.innerHTML = '<i class="fas fa-bars me-2"></i> Menu';
+        }
+      });
+    });
+  });
+</script>
+
 </body>
 </html>

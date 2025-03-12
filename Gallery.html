@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Images</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link href="Index_styles.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+        /* Default styles */
+        .carousel-item img {
+          object-fit: contain;
+          height: 500px;
+          width: 100%;
+        }
+      
+        .title {
+          width: 100%;
+          font-size: 2.125rem;
+          margin: 0.625rem;
+          font-weight: bold;
+          background-color: lightgray;
+          text-align: center;
+          padding: 10px;
+        }
+      
+        /* Media Query for Tablets (768px and below) */
+        @media (max-width: 768px) {
+          .carousel-item img {
+            height: 350px; /* Reduce image height */
+          }
+      
+          .title {
+            font-size: 1.8rem; /* Slightly smaller font size */
+            margin: 0.5rem;
+          }
+        }
+      
+        /* Media Query for Mobile Phones (576px and below) */
+        @media (max-width: 576px) {
+          .carousel-item img {
+            height: 250px; /* Further reduce image height */
+          }
+      
+          .title {
+            font-size: 1.5rem; /* Reduce font size */
+            margin: 0.4rem;
+            padding: 8px;
+          }
+        }
+      
+        /* Media Query for Extra Small Devices (400px and below) */
+        @media (max-width: 400px) {
+          .carousel-item img {
+            height: 200px; /* Minimum image height for very small screens */
+          }
+      
+          .title {
+            font-size: 1.3rem; /* Even smaller font */
+            margin: 0.3rem;
+            padding: 5px;
+          }
+        }
+      </style>
+      
+  </head>
+  <body>
+    <nav class="navbar1">
+      <div
+        class="container-fluid d-flex justify-content-between align-items-center"
+      >
+        <a class="navbar-brand1" href="Index.html">
+          <img
+            src="Images/logo.png"
+            alt="Logo"
+            width="40"
+            height="40"
+            class="d-inline-block align-text-top"
+          />
+          सत्य संस्कृति चैरिटेबल ट्रस्ट
+        </a>
+        <a href="Checkout.php">
+          <button class="btn btn-primary">Become A Member</button>
+        </a>
+      </div>
+    </nav>
+    <div class="container d-flex justify-content-center">
+        <div class="nav-container position-relative w-100">
+          <!-- Toggle Button for Mobile -->
+          <button class="nav-toggle d-md-none d-flex align-items-center justify-content-center mb-3 mx-auto">
+            <i class="fas fa-bars me-2"></i> Menu
+          </button>
+    <div class="container d-flex justify-content-center">
+      <nav class="nav nav-pills flex-column flex-sm-row" id="mainNav">
+        <a
+          class="flex-sm-fill text-sm-center nav-link "
+          aria-current="page"
+          href="index.html"
+          >Home</a
+        >
+        <a class="flex-sm-fill text-sm-center nav-link" href="AboutUs.html"
+          >About Us</a
+        >
+        <a class="flex-sm-fill text-sm-center nav-link" href="NewsEvents.html"
+          >Events</a
+        >
+        <a class="flex-sm-fill text-sm-center nav-link" href="Team.html"
+          >Team</a
+        >
+        <a class="flex-sm-fill text-sm-center nav-link active" href="Gallery.html"
+          >Photo Gallery</a
+        >
+        <a class="flex-sm-fill text-sm-center nav-link" href="ContactUs.html"
+          >Contact Us</a
+        >
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="title"><h1>Bhagwaat Katha</h1></div>
+      <div id="carouselBhagwatKatha" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="./Bhagwat Katha - LaxmiNarayan Yagya Dec 2024/GH010383_1734620286586_2.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Bhagwat Katha - LaxmiNarayan Yagya Dec 2024/GH010386_1735582997576.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Bhagwat Katha - LaxmiNarayan Yagya Dec 2024/GH010388_1735583337101.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Bhagwat Katha - LaxmiNarayan Yagya Dec 2024/GH010407_1735583625226.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Bhagwat Katha - LaxmiNarayan Yagya Dec 2024/GH010440_1738084832051.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Bhagwat Katha - LaxmiNarayan Yagya Dec 2024/GH010441_1738084768346.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Bhagwat Katha - LaxmiNarayan Yagya Dec 2024/GH010446_1738084664815.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Bhagwat Katha - LaxmiNarayan Yagya Dec 2024/GH010460_1735232760402_2.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Bhagwat Katha - LaxmiNarayan Yagya Dec 2024/GH010463_1738084532846.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Bhagwat Katha - LaxmiNarayan Yagya Dec 2024/GX010462_1738084567882.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselBhagwatKatha"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselBhagwatKatha"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="title"><h1>Andaan</h1></div>
+      <div id="carouselAndaan" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="./Anndaan 02-10-2024/GH010250_1727932110796.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Anndaan 02-10-2024/GOPR0261_1727874093681.JPG"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Anndaan 02-10-2024/IMG20241002141235.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Anndaan 02-10-2024/IMG20241002143812.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Anndaan 02-10-2024/IMG20241002143823.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Anndaan 02-10-2024/IMG20241002143850.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Anndaan 02-10-2024/IMG20241002144939.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Anndaan 02-10-2024/IMG20241002144945.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Anndaan 02-10-2024/IMG20241002145004.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselAndaan"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselAndaan"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="title"><h1>AGM</h1></div>
+      <div id="carouselAgm" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="./AGM 13-10-24/IMG20241013201504.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./AGM 13-10-24/IMG20241013201523.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./AGM 13-10-24/IMG20241013201545.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./AGM 13-10-24/IMG20241013201605.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./AGM 13-10-24/IMG20241013201637.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./AGM 13-10-24/IMG20241013201718.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselAgm"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselAgm"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <footer class="bg-body-tertiary text-center">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Facebook -->
+          <a
+            data-mdb-ripple-init
+            class="btn text-white btn-floating m-1"
+            style="background-color: #3b5998"
+            href="#!"
+            role="button"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+
+          <!-- Twitter -->
+          <a
+            data-mdb-ripple-init
+            class="btn text-white btn-floating m-1"
+            style="background-color: #55acee"
+            href="#!"
+            role="button"
+            ><i class="fab fa-twitter"></i
+          ></a>
+
+          <!-- Google -->
+          <a
+            data-mdb-ripple-init
+            class="btn text-white btn-floating m-1"
+            style="background-color: #dd4b39"
+            href="#!"
+            role="button"
+            ><i class="fab fa-google"></i
+          ></a>
+
+          <!-- Instagram -->
+          <a
+            data-mdb-ripple-init
+            class="btn text-white btn-floating m-1"
+            style="background-color: #ac2bac"
+            href="#!"
+            role="button"
+            ><i class="fab fa-instagram"></i
+          ></a>
+
+          <!-- Linkedin -->
+          <a
+            data-mdb-ripple-init
+            class="btn text-white btn-floating m-1"
+            style="background-color: #0082ca"
+            href="#!"
+            role="button"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+          <!-- Github -->
+          <a
+            data-mdb-ripple-init
+            class="btn text-white btn-floating m-1"
+            style="background-color: #333333"
+            href="#!"
+            role="button"
+            ><i class="fab fa-github"></i
+          ></a>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div
+        class="text-center p-3"
+        style="background-color: rgba(0, 0, 0, 0.05)"
+      >
+        <p class="mb-0">
+          The Satya Sanskriti Charitable Trust is an organization driven by a
+          passionate team of individuals who believe in the power of collective
+          action to bring about meaningful change.
+        </p>
+        <p class="mt-2 mb-0">
+          &copy; 2025 Satya Sanskriti Charitable Trust. All rights reserved.
+        </p>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Bootstrap JS Bundle -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Custom JS for Toggle Menu -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const navToggle = document.querySelector(".nav-toggle");
+        const mainNav = document.getElementById("mainNav");
+
+        navToggle.addEventListener("click", function () {
+          // Toggle the 'd-none' class for smaller screens
+          mainNav.classList.toggle("d-none");
+
+          // Change icon when toggled
+          const icon = navToggle.querySelector("i");
+          if (mainNav.classList.contains("d-none")) {
+            icon.classList.remove("fa-times");
+            icon.classList.add("fa-bars");
+            navToggle.innerHTML = '<i class="fas fa-bars me-2"></i> Menu';
+          } else {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-times");
+            navToggle.innerHTML = '<i class="fas fa-times me-2"></i> Close';
+          }
+        });
+
+        // Initially hide the menu on mobile devices
+        if (window.innerWidth < 768) {
+          mainNav.classList.add("d-none");
+        }
+
+        // Handle window resize
+        window.addEventListener("resize", function () {
+          if (window.innerWidth >= 768) {
+            mainNav.classList.remove("d-none");
+          } else if (
+            !mainNav.classList.contains("d-none") &&
+            !navToggle.classList.contains("active")
+          ) {
+            mainNav.classList.add("d-none");
+          }
+        });
+
+        // Close menu when clicking a link (for mobile)
+        document.querySelectorAll("#mainNav .nav-link").forEach((link) => {
+          link.addEventListener("click", function () {
+            if (window.innerWidth < 768) {
+              mainNav.classList.add("d-none");
+              navToggle.innerHTML = '<i class="fas fa-bars me-2"></i> Menu';
+            }
+          });
+        });
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

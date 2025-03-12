@@ -52,6 +52,8 @@
           <a class="flex-sm-fill text-sm-center nav-link" href="AboutUs.html">About Us</a>
           <a class="flex-sm-fill text-sm-center nav-link" href="NewsEvents.html">Events</a>
           <a class="flex-sm-fill text-sm-center nav-link" href="Team.html">Team</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="Gallery.html">Photo Gallery</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="ContactUs.html">Contact Us</a>
         </nav>
       </div>
     </div>
@@ -244,14 +246,14 @@
 
       <!-- Copyright -->
       <div
-      class="text-center p-3"
-      style="background-color: rgba(0, 0, 0, 0.05)"
-    >
-      <p class="mb-0">The Satya Sanskriti Charitable Trust is an organization driven by a
-      passionate team of individuals who believe in the power of collective
-      action to bring about meaningful change.</p>
-      <p class="mt-2 mb-0">&copy; 2025 Satya Sanskriti Charitable Trust. All rights reserved.</p>
-    </div>
+        class="text-center p-3"
+        style="background-color: rgba(0, 0, 0, 0.05)"
+      >
+        <p class="mb-0">The Satya Sanskriti Charitable Trust is an organization driven by a
+        passionate team of individuals who believe in the power of collective
+        action to bring about meaningful change.</p>
+        <p class="mt-2 mb-0">&copy; 2025 Satya Sanskriti Charitable Trust. All rights reserved.</p>
+      </div>
       <!-- Copyright -->
     </footer>
 
@@ -297,6 +299,16 @@
           } else if (!mainNav.classList.contains('d-none') && !navToggle.classList.contains('active')) {
             mainNav.classList.add('d-none');
           }
+        });
+
+        // Close menu when clicking a link (for mobile)
+        document.querySelectorAll('#mainNav .nav-link').forEach(link => {
+          link.addEventListener('click', function () {
+            if (window.innerWidth < 768) {
+              mainNav.classList.add('d-none');
+              navToggle.innerHTML = '<i class="fas fa-bars me-2"></i> Menu';
+            }
+          });
         });
       });
     </script>
