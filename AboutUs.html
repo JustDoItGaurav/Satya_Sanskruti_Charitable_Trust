@@ -182,35 +182,51 @@
     <!-- Custom JavaScript for the page -->
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        // Navbar Toggle for Mobile
-        const navToggle = document.querySelector('.nav-toggle');
-        const mainNav = document.getElementById('mainNav');
+  // Navbar Toggle for Mobile
+  const navToggle = document.querySelector('.nav-toggle');
+  const mainNav = document.getElementById('mainNav');
+  
+  // Set initial state for mobile screens
+  if (window.innerWidth < 768) {
+    mainNav.classList.add('d-none');
+  }
+  
+  navToggle.addEventListener('click', function () {
+    mainNav.classList.toggle('d-none');
     
-        navToggle.addEventListener('click', function () {
-          mainNav.classList.toggle('d-none');
-    
-          // Toggle icon
-          const icon = navToggle.querySelector('i');
-          if (mainNav.classList.contains('d-none')) {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-            navToggle.innerHTML = '<i class="fas fa-bars me-2"></i> Menu';
-          } else {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-            navToggle.innerHTML = '<i class="fas fa-times me-2"></i> Close';
-          }
-        });
-    
-        // Hide menu on mobile when a link is clicked
-        document.querySelectorAll('#mainNav .nav-link').forEach(link => {
-          link.addEventListener('click', function () {
-            if (window.innerWidth < 768) {
-              mainNav.classList.add('d-none');
-              navToggle.innerHTML = '<i class="fas fa-bars me-2"></i> Menu';
-            }
-          });
-        });
+    // Update button text and icon based on menu state
+    if (mainNav.classList.contains('d-none')) {
+      navToggle.innerHTML = '<i class="fas fa-bars me-2"></i> Menu';
+      navToggle.setAttribute('aria-expanded', 'false');
+    } else {
+      navToggle.innerHTML = '<i class="fas fa-times me-2"></i> Close';
+      navToggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+  
+  // Hide menu on mobile when a link is clicked
+  document.querySelectorAll('#mainNav .nav-link').forEach(link => {
+    link.addEventListener('click', function () {
+      if (window.innerWidth < 768) {
+        mainNav.classList.add('d-none');
+        navToggle.innerHTML = '<i class="fas fa-bars me-2"></i> Menu';
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+  
+  // Handle window resize events
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 768) {
+      mainNav.classList.remove('d-none');
+    } else if (!navToggle.classList.contains('active')) {
+      mainNav.classList.add('d-none');
+    }
+  });
+
+  // Rest of your existing code (map initialization, etc.)
+  // ...
+
     
         // Initialize Map Function
         function initMap(userPosition = null) {
