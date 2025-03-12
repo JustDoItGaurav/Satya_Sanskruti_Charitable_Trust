@@ -18,14 +18,73 @@
         color: #28a745;
       }
     </style>
-    <script>
-      setTimeout(function () {
-        window.location.href = "index.html";
-      }, 5000); // Redirect after 5 seconds
-    </script>
   </head>
   <body>
     <h1>Payment Successful</h1>
+    <p>Thank you for your donation!</p>
     <p>You will be redirected to the homepage shortly...</p>
+    <p id="error-message" style="color: red; display: none"></p>
+
+    <!-- Add Modern Firebase SDK -->
+    <script type="module">
+      // Import the functions you need from the SDKs
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+      } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAO5xFUGkSTcJ5VEZS3O5T8h_m4lt4hVdc",
+        authDomain: "satyasanskruticharitabletrust.firebaseapp.com",
+        projectId: "satyasanskruticharitabletrust",
+        storageBucket: "satyasanskruticharitabletrust.firebasestorage.app",
+        messagingSenderId: "233629367169",
+        appId: "1:233629367169:web:74a4ff7dbda70ec57dc680",
+        measurementId: "G-X2N24095EC",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Function to save data
+      async function saveData() {
+        try {
+          // Retrieve form data from session storage
+          const formData = JSON.parse(sessionStorage.getItem("formData"));
+          console.log("Form Data:", formData);
+
+          if (formData) {
+            // Store form data in Firestore
+            const docRef = await addDoc(collection(db, "donations"), formData);
+            console.log("Document written with ID: ", docRef.id);
+
+            // Clear session storage after storing data
+            sessionStorage.removeItem("formData");
+          } else {
+            console.log("No form data found in session storage.");
+            document.getElementById("error-message").textContent =
+              "No donation information found. Please try again.";
+            document.getElementById("error-message").style.display = "block";
+          }
+        } catch (error) {
+          console.error("Error adding document: ", error);
+          document.getElementById("error-message").textContent =
+            "There was an error processing your donation: " + error.message;
+          document.getElementById("error-message").style.display = "block";
+        }
+      }
+
+      // Call the save function
+      saveData();
+
+      // Redirect to homepage after 5 seconds
+      setTimeout(function () {
+        window.location.href = "index.html";
+      }, 5000);
+    </script>
   </body>
 </html>

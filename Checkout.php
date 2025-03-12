@@ -86,6 +86,12 @@
             background-color: #097c3c; /* Darker green on hover */
         }
 
+        #loading-spinner {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .contact-image {
@@ -107,7 +113,6 @@
                 <img src="Images/logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
                 सत्य संस्कृति चैरिटेबल ट्रस्ट
             </a>
-            
         </div>
     </nav>
 
@@ -122,7 +127,7 @@
 
             <!-- Right Column: Form -->
             <div class="col-md-6 contact-details d-flex flex-column justify-content-center">
-                <form action="Payscript.php" method="post" onsubmit="return validateForm()" class="mx-auto" style="max-width: 400px;">
+                <form id="checkoutForm" action="Payscript.php" method="post" onsubmit="return submitForm(event)" class="mx-auto" style="max-width: 400px;">
                     <h3 class="text-center mb-4">Checkout Form (चेकआउट फॉर्म)</h3>
 
                     <!-- Full Name -->
@@ -189,8 +194,16 @@
                         </select>
                     </div>
 
+                    <!-- Loading spinner -->
+                    <div id="loading-spinner">
+                        <div class="spinner-border text-success" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p>Checking membership status...</p>
+                    </div>
+
                     <!-- Submit Button -->
-                    <button type="submit" class="btn btn-primary w-100">Pay Now (अब भुगतान करें)</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary w-100">Pay Now (अब भुगतान करें)</button>
                 </form>
             </div>
         </div>
@@ -199,8 +212,27 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
     <!-- Custom Script -->
     <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAO5xFUGkSTcJ5VEZS3O5T8h_m4lt4hVdc",
+            authDomain: "satyasanskruticharitabletrust.firebaseapp.com",
+            projectId: "satyasanskruticharitabletrust",
+            storageBucket: "satyasanskruticharitabletrust.firebasestorage.app",
+            messagingSenderId: "233629367169",
+            appId: "1:233629367169:web:74a4ff7dbda70ec57dc680",
+            measurementId: "G-X2N24095EC",
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
         function validateForm() {
             const aadhar = document.getElementById("aadhar").value;
             const pan = document.getElementById("pan").value;
@@ -232,6 +264,103 @@
             }
 
             return true;
+        }
+
+        async function checkIfMemberExists(aadhar, pan) {
+            try {
+                // Query for Aadhar
+                const aadharQuery = await db.collection("donations")
+                    .where("aadhar", "==", aadhar)
+                    .get();
+                
+                if (!aadharQuery.empty) {
+                    const memberDoc = aadharQuery.docs[0].data();
+                    return {
+                        exists: true,
+                        membershipType: memberDoc.membership
+                    };
+                }
+                
+                // Query for PAN
+                const panQuery = await db.collection("donations")
+                    .where("pan", "==", pan)
+                    .get();
+                
+                if (!panQuery.empty) {
+                    const memberDoc = panQuery.docs[0].data();
+                    return {
+                        exists: true,
+                        membershipType: memberDoc.membership
+                    };
+                }
+                
+                return {
+                    exists: false
+                };
+            } catch (error) {
+                console.error("Error checking membership:", error);
+                throw error;
+            }
+        }
+
+        function storeFormData() {
+            const formData = {
+                name: document.getElementById("fname").value,
+                email: document.getElementById("email").value,
+                mobile: document.getElementById("mobile").value,
+                address: document.getElementById("adr").value,
+                aadhar: document.getElementById("aadhar").value,
+                pan: document.getElementById("pan").value,
+                dob: document.getElementById("dob").value,
+                hobbies: document.getElementById("hobbies").value,
+                qualification: document.getElementById("qualification").value,
+                membership: document.getElementById("membership").value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Store form data in session storage
+            sessionStorage.setItem('formData', JSON.stringify(formData));
+        }
+
+        async function submitForm(event) {
+            event.preventDefault();
+            
+            if (!validateForm()) {
+                return false;
+            }
+            
+            // Show loading spinner
+            document.getElementById("loading-spinner").style.display = "block";
+            document.getElementById("submitBtn").disabled = true;
+            
+            try {
+                const aadhar = document.getElementById("aadhar").value;
+                const pan = document.getElementById("pan").value;
+                
+                // Check if member already exists
+                const memberStatus = await checkIfMemberExists(aadhar, pan);
+                
+                // Hide loading spinner
+                document.getElementById("loading-spinner").style.display = "none";
+                document.getElementById("submitBtn").disabled = false;
+                
+                if (memberStatus.exists) {
+                    alert(`You are already a ${memberStatus.membershipType} member. (आप पहले से ही ${memberStatus.membershipType === 'Life Membership' ? 'आजीवन सदस्य' : 'सामान्य सदस्य'} हैं।)`);
+                    return false;
+                }
+                
+                // Store form data and submit the form
+                storeFormData();
+                document.getElementById("checkoutForm").submit();
+                return true;
+                
+            } catch (error) {
+                console.error("Error during form submission:", error);
+                document.getElementById("loading-spinner").style.display = "none";
+                document.getElementById("submitBtn").disabled = false;
+                alert("An error occurred. Please try again. (एक त्रुटि हुई। कृपया पुनः प्रयास करें।)");
+                return false;
+            }
         }
     </script>
 </body>
