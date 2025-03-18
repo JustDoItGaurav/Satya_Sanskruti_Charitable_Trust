@@ -17,13 +17,18 @@
       h1 {
         color: #28a745;
       }
+      #error-message {
+        color: red;
+        display: none;
+        margin-top: 20px;
+      }
     </style>
   </head>
   <body>
     <h1>Payment Successful</h1>
     <p>Thank you for your donation!</p>
     <p>You will be redirected to the homepage shortly...</p>
-    <p id="error-message" style="color: red; display: none"></p>
+    <p id="error-message"></p>
 
     <!-- Add Modern Firebase SDK -->
     <script type="module">
@@ -58,33 +63,43 @@
           console.log("Form Data:", formData);
 
           if (formData) {
+            // Check if the image URL is present
+            if (!formData.imageUrl) {
+              throw new Error("Image URL is missing. Please upload an image.");
+            }
+
             // Store form data in Firestore
             const docRef = await addDoc(collection(db, "donations"), formData);
             console.log("Document written with ID: ", docRef.id);
 
             // Clear session storage after storing data
             sessionStorage.removeItem("formData");
+
+            // Redirect to homepage after 5 seconds
+            setTimeout(function () {
+              window.location.href = "index.html";
+            }, 5000);
           } else {
-            console.log("No form data found in session storage.");
-            document.getElementById("error-message").textContent =
-              "No donation information found. Please try again.";
-            document.getElementById("error-message").style.display = "block";
+            throw new Error("No donation information found. Please try again.");
           }
         } catch (error) {
           console.error("Error adding document: ", error);
           document.getElementById("error-message").textContent =
             "There was an error processing your donation: " + error.message;
           document.getElementById("error-message").style.display = "block";
+
+          // Clear session storage in case of error
+          sessionStorage.removeItem("formData");
+
+          // Redirect to homepage after 10 seconds
+          setTimeout(function () {
+            window.location.href = "index.html";
+          }, 10000);
         }
       }
 
       // Call the save function
       saveData();
-
-      // Redirect to homepage after 5 seconds
-      setTimeout(function () {
-        window.location.href = "index.html";
-      }, 5000);
     </script>
   </body>
 </html>

@@ -1,0 +1,54 @@
+/* Default styles */
+.carousel-item img {
+  object-fit: contain;
+  height: 500px;
+  width: 100%;
+}
+
+.title {
+  width: 100%;
+  font-size: 2.125rem;
+  margin: 0.625rem;
+  font-weight: bold;
+  background-color: lightgray;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Media Query for Tablets (768px and below) */
+@media (max-width: 768px) {
+  .carousel-item img {
+    height: 350px; /* Reduce image height */
+  }
+
+  .title {
+    font-size: 1.8rem; /* Slightly smaller font size */
+    margin: 0.5rem;
+  }
+}
+
+/* Media Query for Mobile Phones (576px and below) */
+@media (max-width: 576px) {
+  .carousel-item img {
+    height: 250px; /* Further reduce image height */
+  }
+
+  .title {
+    font-size: 1.5rem; /* Reduce font size */
+    margin: 0.4rem;
+    padding: 8px;
+  }
+}
+
+/* Media Query for Extra Small Devices (400px and below) */
+@media (max-width: 400px) {
+  .carousel-item img {
+    height: 200px; /* Minimum image height for very small screens */
+  }
+
+  .title {
+    font-size: 1.3rem; /* Even smaller font */
+    margin: 0.3rem;
+    padding: 5px;
+  }
+}

@@ -1,0 +1,36 @@
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #00c853, #00796b); /* Green Gradient */            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .checkout-container {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .checkout-container h2 {
+            color: #0e9e4f;
+            margin-bottom: 20px;
+        }
+        .checkout-container button {
+            background-color: #0e9e4f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .checkout-container button:hover {
+            background-color: #0c7b3e;
+        }
+   
