@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Razorpay Test API Key
-$apiKey = "rzp_test_MVsyK2krAQ5CZs";
+$apiKey = "rzp_test_e9b72njeFD2yeM";
 
 // Ensure required POST variables are set
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
