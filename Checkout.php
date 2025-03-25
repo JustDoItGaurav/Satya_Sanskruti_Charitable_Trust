@@ -224,7 +224,7 @@
         }
 
         // Function to check if member already exists
-        async function checkIfMemberExists(aadhar, pan) {
+        async function checkIfMemberExists(aadhar, pan, email, mobile) {
             try {
                 // Query for Aadhar
                 const aadharQuery = await db.collection("donations")
@@ -235,7 +235,8 @@
                     const memberDoc = aadharQuery.docs[0].data();
                     return {
                         exists: true,
-                        membershipType: memberDoc.membership
+                        membershipType: memberDoc.membership,
+                        reason: "Aadhar Card"
                     };
                 }
                 
@@ -248,7 +249,36 @@
                     const memberDoc = panQuery.docs[0].data();
                     return {
                         exists: true,
-                        membershipType: memberDoc.membership
+                        membershipType: memberDoc.membership,
+                        reason: "PAN Card"
+                    };
+                }
+
+                // Query for Email
+                const emailQuery = await db.collection("donations")
+                    .where("email", "==", email)
+                    .get();
+                
+                if (!emailQuery.empty) {
+                    const memberDoc = emailQuery.docs[0].data();
+                    return {
+                        exists: true,
+                        membershipType: memberDoc.membership,
+                        reason: "Email"
+                    };
+                }
+
+                // Query for Mobile
+                const mobileQuery = await db.collection("donations")
+                    .where("mobile", "==", mobile)
+                    .get();
+                
+                if (!mobileQuery.empty) {
+                    const memberDoc = mobileQuery.docs[0].data();
+                    return {
+                        exists: true,
+                        membershipType: memberDoc.membership,
+                        reason: "Mobile Number"
                     };
                 }
                 
@@ -276,12 +306,16 @@
             try {
                 const aadhar = document.getElementById("aadhar").value;
                 const pan = document.getElementById("pan").value;
+                const email = document.getElementById("email").value;
+                const mobile = document.getElementById("mobile").value;
                 
                 // Check if member already exists
-                const memberStatus = await checkIfMemberExists(aadhar, pan);
+                const memberStatus = await checkIfMemberExists(aadhar, pan, email, mobile);
                 
                 if (memberStatus.exists) {
-                    alert(`You are already a ${memberStatus.membershipType} member. (आप पहले से ही ${memberStatus.membershipType === 'Lifetime trustie' ? 'आजीवन सदस्य' : 'सामान्य सदस्य'} हैं।)`);
+                    let message = `This ${memberStatus.reason} is already registered as a ${memberStatus.membershipType} member.`;
+                    message += `\n(यह ${getHindiReason(memberStatus.reason)} पहले से ही ${memberStatus.membershipType === 'Lifetime trustie' ? 'आजीवन सदस्य' : 'सामान्य सदस्य'} के रूप में पंजीकृत है।)`;
+                    alert(message);
                     document.getElementById("loading-spinner").style.display = "none";
                     document.getElementById("submitBtn").disabled = false;
                     return false;
@@ -298,12 +332,6 @@
                 hiddenInput.value = imageUrl;
                 document.getElementById("checkoutForm").appendChild(hiddenInput);
 
-                // Debugging: Log the form data before submission
-                const formData = new FormData(document.getElementById("checkoutForm"));
-                for (const [key, value] of formData.entries()) {
-                    console.log(key, value);
-                }
-
                 // Submit the form to Payscript.php
                 document.getElementById("checkoutForm").submit();
             } catch (error) {
@@ -313,6 +341,17 @@
                 alert("An error occurred. Please try again. (एक त्रुटि हुई। कृपया पुनः प्रयास करें।)");
                 return false;
             }
+        }
+
+        // Helper function to get Hindi translations for reasons
+        function getHindiReason(reason) {
+            const translations = {
+                "Aadhar Card": "आधार कार्ड",
+                "PAN Card": "पैन कार्ड",
+                "Email": "ईमेल",
+                "Mobile Number": "मोबाइल नंबर"
+            };
+            return translations[reason] || reason;
         }
     </script>
 </body>
